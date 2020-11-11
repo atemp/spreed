@@ -71,6 +71,12 @@
 			<MatterbridgeSettings
 				v-if="canModerate && matterbridgeEnabled" />
 		</AppSidebarTab>
+		<Description
+			slot="description"
+			:description="description"
+			:is-editing-description="isEditingDescription"
+			@submit:description="handleUpdateDescription"
+			@update:isEditingDescription="handleEditDescription" />
 	</AppSidebar>
 </template>
 
@@ -87,6 +93,7 @@ import MatterbridgeSettings from './Matterbridge/MatterbridgeSettings'
 import isInLobby from '../../mixins/isInLobby'
 import SetGuestUsername from '../SetGuestUsername'
 import { EventBus } from '../../services/EventBus'
+import Description from './Description/Description'
 
 export default {
 	name: 'RightSidebar',
@@ -98,6 +105,7 @@ export default {
 		ParticipantsTab,
 		SetGuestUsername,
 		MatterbridgeSettings,
+		Description,
 	},
 
 	mixins: [
@@ -120,6 +128,8 @@ export default {
 			// Sidebar status before starting editing operation
 			sidebarOpenBeforeEditingName: '',
 			matterbridgeEnabled: loadState('talk', 'enable_matterbridge'),
+			description: 'sdfjkhsdkj fhs dfkjhsdfkjhs dfkjas dh fkjsdfhkasdjfhdk ajfhsd kjfhsdkfj hsdkfjhdsfkjsdhfkjsdhf',
+			isEditingDescription: false,
 		}
 	},
 
@@ -247,6 +257,19 @@ export default {
 
 		showSettings() {
 			EventBus.$emit('show-settings', true)
+		},
+
+		handleUpdateDescription(payload) {
+			setTimeout(() => {
+				console.debug('payload', payload, 'waiting one second')
+			}, 1000)
+			this.description = payload
+			this.isEditingDescription = false
+		},
+
+		handleEditDescription(payload) {
+			console.debug(payload)
+			this.isEditingDescription = payload
 		},
 
 	},
