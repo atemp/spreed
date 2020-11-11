@@ -129,6 +129,8 @@ class Room {
 	/** @var string */
 	private $name;
 	/** @var string */
+	private $description;
+	/** @var string */
 	private $password;
 	/** @var int */
 	private $activeGuests;
@@ -164,6 +166,7 @@ class Room {
 								?int $assignedSignalingServer,
 								string $token,
 								string $name,
+								string $description,
 								string $password,
 								int $activeGuests,
 								\DateTime $activeSince = null,
@@ -187,6 +190,7 @@ class Room {
 		$this->assignedSignalingServer = $assignedSignalingServer;
 		$this->token = $token;
 		$this->name = $name;
+		$this->description = $description;
 		$this->password = $password;
 		$this->activeGuests = $activeGuests;
 		$this->activeSince = $activeSince;
@@ -264,6 +268,10 @@ class Room {
 
 	public function getDisplayName(string $userId): string {
 		return $this->manager->resolveRoomDisplayName($this, $userId);
+	}
+
+	public function getDescription(): string {
+		return $this->description;
 	}
 
 	public function getActiveGuests(): int {
