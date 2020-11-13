@@ -432,7 +432,7 @@ export default {
 			opacity: .9;
 		}
 		&__quote {
-			margin: 0px 16px 12px 24px;
+			margin: 0 16px 12px 24px;
 			background-color: var(--color-background-dark);
 			padding: 8px;
 			border-radius: var(--border-radius-large);
