@@ -64,6 +64,9 @@ import ProgressBar from '@nextcloud/vue/dist/Components/ProgressBar'
 import Tooltip from '@nextcloud/vue/dist/Directives/Tooltip'
 import Close from 'vue-material-design-icons/Close'
 import { getCapabilities } from '@nextcloud/capabilities'
+import variables from '../../../../../assets/_export.scss'
+// FIXME: why is this always empty ???
+console.log('#### ', variables)
 
 const PREVIEW_TYPE = {
 	TEMPORARY: 0,
@@ -251,9 +254,9 @@ export default {
 			}
 
 			// use preview provider URL to render a smaller preview
-			let previewSize = 384
+			let previewSize = variables.filePreviewMaxHeight || 384
 			if (this.smallPreview) {
-				previewSize = 32
+				previewSize = variables.filePreviewSmallMaxHeight || 32
 			}
 			previewSize = Math.ceil(previewSize * window.devicePixelRatio)
 			if (userId === null) {
@@ -411,13 +414,13 @@ export default {
 		display: inline-block;
 		border-radius: var(--border-radius);
 		max-width: 100%;
-		max-height: 384px;
+		max-height: $file-preview-max-height;
 	}
 	.preview-small {
 		display: inline-block;
 		border-radius: var(--border-radius);
 		max-width: 100%;
-		max-height: 32px;
+		max-height: $file-preview-small-max-height;
 	}
 
 	.image-container {
